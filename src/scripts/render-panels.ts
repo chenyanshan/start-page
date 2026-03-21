@@ -158,10 +158,6 @@ function formatStatus(status: NonNullable<PanelLink["status"]>): string {
 function anchorAttributes(url: string): string {
   const escapedUrl = escapeHtml(url);
 
-  if (isExternalUrl(url)) {
-    return `href="${escapedUrl}" target="_blank" rel="noreferrer noopener"`;
-  }
-
   return `href="${escapedUrl}"`;
 }
 

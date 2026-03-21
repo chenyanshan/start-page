@@ -404,6 +404,84 @@
   box-shadow: 0 6px 16px rgba(255, 255, 255, 0.14);
 }
 
+@keyframes skeleton-shimmer {
+  from {
+    background-position: 200% 0;
+  }
+
+  to {
+    background-position: -20% 0;
+  }
+}
+
+.app-shell--loading,
+.split-shell--loading {
+  pointer-events: none;
+}
+
+.panel__inner--loading {
+  gap: 0.58rem;
+}
+
+.skeleton-line,
+.skeleton-pill,
+.skeleton-card {
+  display: block;
+  border-radius: 999px;
+  border: 1px solid rgba(255, 255, 255, 0.14);
+  background:
+    linear-gradient(
+      98deg,
+      rgba(255, 255, 255, 0.08) 0%,
+      rgba(255, 255, 255, 0.2) 42%,
+      rgba(255, 255, 255, 0.08) 76%
+    )
+    #253040;
+  background-size: 240% 100%;
+  animation: skeleton-shimmer 1.5s linear infinite;
+}
+
+.skeleton-line--eyebrow {
+  width: 4rem;
+  height: 0.52rem;
+}
+
+.skeleton-line--title {
+  width: min(80%, 14rem);
+  height: 1.9rem;
+}
+
+.skeleton-line--description {
+  width: min(84%, 18rem);
+  height: 0.8rem;
+}
+
+.skeleton-line--menu {
+  width: 3.8rem;
+  height: 0.72rem;
+}
+
+.skeleton-line--copyright {
+  width: 8.2rem;
+  height: 0.64rem;
+  margin-top: auto;
+}
+
+.skeleton-line--links-label {
+  width: 4.4rem;
+  height: 0.56rem;
+}
+
+.skeleton-pill--button {
+  width: 5.6rem;
+  height: 1.9rem;
+}
+
+.skeleton-card {
+  border-radius: 0.72rem;
+  height: 4.2rem;
+}
+
 @media (min-width: 960px) and (hover: hover) and (pointer: fine) {
   .panel--vibe .panel__actions {
     display: none;

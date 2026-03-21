@@ -79,7 +79,10 @@
   .blog-side__tool,
   .panel__primary,
   .panel__open,
-  .mobile-back {
+  .mobile-back,
+  .skeleton-line,
+  .skeleton-pill,
+  .skeleton-card {
     transition-duration: 1ms !important;
     animation-duration: 1ms !important;
     animation-iteration-count: 1 !important;

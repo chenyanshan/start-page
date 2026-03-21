@@ -3,9 +3,11 @@ import { loadNavigationData } from "./scripts/load-data";
 import { renderApp } from "./scripts/render-panels";
 
 const LOADING_MARKUP = `
-  <main class="app-shell app-shell--status">
-    <p class="status-title">正在加载导航</p>
-    <p class="status-message">正在准备分屏视图...</p>
+  <main class="app-shell app-shell--loading" aria-busy="true">
+    <section class="split-shell split-shell--loading" aria-label="导航正在加载">
+      <article class="panel panel--blog panel--dark" aria-hidden="true"></article>
+      <article class="panel panel--vibe panel--light" aria-hidden="true"></article>
+    </section>
   </main>
 `;
 
