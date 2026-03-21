@@ -1,0 +1,53 @@
+:root {
+  --font-sans: "SF Pro Display", "SF Pro Text", "PingFang SC", "Hiragino Sans GB",
+    "Avenir Next", "Segoe UI", sans-serif;
+  --font-serif: "New York", "Iowan Old Style", "Songti SC", serif;
+
+  --bg-light: #eaedf2;
+  --fg-light: #16181c;
+  --muted-light: rgba(22, 24, 28, 0.68);
+  --line-light: rgba(22, 24, 28, 0.14);
+
+  --bg-dark: #15181f;
+  --fg-dark: #f2f4f8;
+  --muted-dark: rgba(242, 244, 248, 0.73);
+  --line-dark: rgba(255, 255, 255, 0.2);
+
+  --panel-light-start: #f8f9fc;
+  --panel-light-end: #e5ebf3;
+  --panel-dark-start: #232830;
+  --panel-dark-end: #151a21;
+
+  --glass-light: rgba(255, 255, 255, 0.56);
+  --glass-dark: rgba(35, 40, 48, 0.5);
+  --glass-border-light: rgba(255, 255, 255, 0.72);
+  --glass-border-dark: rgba(255, 255, 255, 0.2);
+
+  --shadow-soft: 0 28px 85px rgba(26, 37, 53, 0.22);
+  --shadow-dark: 0 30px 95px rgba(0, 0, 0, 0.46);
+
+  --focus-ring: #8291ad;
+  --overlay-soft-light: rgba(255, 255, 255, 0.25);
+  --overlay-soft-dark: rgba(255, 255, 255, 0.065);
+
+  --space-1: 0.5rem;
+  --space-2: 0.75rem;
+  --space-3: 1rem;
+  --space-4: 1.5rem;
+  --space-5: 2rem;
+  --space-6: 3rem;
+  --space-7: clamp(2rem, 6vw, 5rem);
+
+  --radius-sm: 0.75rem;
+  --radius-md: 1.25rem;
+  --radius-lg: 1.8rem;
+  --radius-pill: 999px;
+
+  --duration-layout: 1280ms;
+  --duration-content: 680ms;
+  --duration-fast: 320ms;
+
+  --ease-layout: cubic-bezier(0.19, 1, 0.22, 1);
+  --ease-content: cubic-bezier(0.2, 1, 0.24, 1);
+  --ease-fast: cubic-bezier(0.32, 0.72, 0, 1);
+}

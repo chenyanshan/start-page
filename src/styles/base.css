@@ -1,0 +1,60 @@
+html {
+  color-scheme: dark;
+}
+
+body {
+  font-family: var(--font-sans);
+  background:
+    radial-gradient(
+      circle at var(--bg-x, 50%) var(--bg-y, 50%),
+      rgba(118, 143, 186, 0.22),
+      rgba(118, 143, 186, 0) 20%
+    ),
+    radial-gradient(circle at 6% 8%, rgba(89, 99, 123, 0.34), transparent 34%),
+    radial-gradient(circle at 92% 16%, rgba(58, 67, 87, 0.28), transparent 32%),
+    radial-gradient(circle at 44% 86%, rgba(31, 37, 49, 0.26), transparent 42%),
+    linear-gradient(155deg, #0b0d11 0%, #0e1116 55%, #0b0d12 100%);
+  color: #eef2fa;
+  -webkit-font-smoothing: antialiased;
+  text-rendering: optimizeLegibility;
+  letter-spacing: 0.01em;
+}
+
+body.is-mobile-expanded {
+  overflow: hidden;
+}
+
+#app {
+  min-height: 100svh;
+}
+
+.app-shell {
+  min-height: 100svh;
+  position: relative;
+  overflow: clip;
+}
+
+.app-shell--status {
+  display: grid;
+  place-content: center;
+  gap: var(--space-2);
+  padding: var(--space-6);
+  text-align: center;
+}
+
+.status-title {
+  font-family: var(--font-serif);
+  font-size: clamp(1.6rem, 2.4vw, 2.2rem);
+  line-height: 1.1;
+}
+
+.status-message {
+  font-size: 0.95rem;
+  letter-spacing: 0.02em;
+  opacity: 0.72;
+}
+
+:focus-visible {
+  outline: 2px solid var(--focus-ring);
+  outline-offset: 3px;
+}

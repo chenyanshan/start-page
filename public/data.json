@@ -1,0 +1,44 @@
+{
+  "meta": {
+    "siteName": "我的导航",
+    "tagline": "左侧博客，右侧导航",
+    "owner": "Chen"
+  },
+  "panels": {
+    "blog": {
+      "theme": "dark",
+      "eyebrow": "博客入口",
+      "title": "Hi AI！",
+      "description": "点击跳转至我的独立博客站点。",
+      "primary": {
+        "label": "进入博客",
+        "url": "https://hihihiai.com"
+      },
+      "links": []
+    },
+    "vibe": {
+      "theme": "light",
+      "eyebrow": "导航",
+      "title": "网站导航",
+      "description": "燕山的 Vibe Coding 网站导航",
+      "links": [
+        {
+          "name": "零售创业案例数据库",
+          "url": "https://case.hihihiai.com/",
+          "description": "聚合成功、失败、警示案例，帮助你在开店前看清关键风险与机会。",
+          "tag": "归档",
+          "status": "live",
+          "featured": true
+        },
+        {
+          "name": "基础单词速记",
+          "url": "https://https://fs.hihihiai.com/",
+          "description": "艾宾浩斯节奏驱动的 2000 高频词学习应用。",
+          "tag": "工具",
+          "status": "live",
+          "featured": true
+        }
+      ]
+    }
+  }
+}

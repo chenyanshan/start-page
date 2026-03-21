@@ -1,0 +1,218 @@
+@media (max-width: 959px), (hover: none), (pointer: coarse) {
+  .split-shell {
+    --mobile-inset: 0.56rem;
+    --mobile-blog-height: clamp(8.6rem, 22svh, 10.8rem);
+    min-height: 100svh;
+    position: relative;
+    padding: var(--mobile-inset);
+  }
+
+  .panel {
+    position: absolute;
+    inset: var(--mobile-inset);
+    top: calc(var(--mobile-inset) + env(safe-area-inset-top));
+    bottom: calc(var(--mobile-inset) + env(safe-area-inset-bottom));
+    min-height: 0;
+    align-items: stretch;
+    padding: 0.7rem;
+    border-radius: 0.92rem;
+  }
+
+  .panel--blog {
+    border-right: 1px solid rgba(255, 255, 255, 0.1);
+    z-index: 1;
+    padding-left: 0.52rem;
+  }
+
+  .panel--vibe {
+    z-index: 2;
+    left: calc(var(--mobile-inset) + 0.12rem);
+    right: calc(var(--mobile-inset) + 0.12rem);
+    top: calc(var(--mobile-inset) + env(safe-area-inset-top) + var(--mobile-blog-height) + 0.36rem);
+    bottom: calc(var(--mobile-inset) + env(safe-area-inset-bottom) + 0.08rem);
+    box-shadow:
+      0 12px 22px rgba(0, 0, 0, 0.3),
+      inset 0 1px 0 rgba(255, 255, 255, 0.14);
+  }
+
+  .panel--blog .panel__inner {
+    width: 100%;
+    max-width: 100%;
+    min-width: 0;
+    min-height: calc(var(--mobile-blog-height) - 0.2rem);
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    justify-content: flex-start;
+    gap: 0.3rem;
+    padding: 0;
+  }
+
+  .blog-side__divider,
+  .blog-side__tools {
+    display: none;
+  }
+
+  .panel--blog .panel__eyebrow {
+    display: block;
+    font-size: 0.62rem;
+    letter-spacing: 0.08em;
+    opacity: 0.68;
+  }
+
+  .panel--blog .panel__description {
+    display: block;
+    font-size: 0.73rem;
+    line-height: 1.32;
+    max-width: 24ch;
+    color: rgba(236, 242, 252, 0.8);
+  }
+
+  .blog-side__menu {
+    display: flex;
+    align-items: center;
+    justify-content: flex-start;
+    gap: 0.48rem;
+  }
+
+  .blog-side__menu-link {
+    font-size: 0.72rem;
+    line-height: 1.25;
+  }
+
+  .blog-side__copyright {
+    display: block;
+    margin-top: auto;
+    font-size: 0.62rem;
+    line-height: 1.28;
+    color: rgba(224, 231, 244, 0.74);
+  }
+
+  .panel--blog .panel__title {
+    font-family: var(--font-sans);
+    font-size: clamp(1.08rem, 4.7vw, 1.36rem);
+    line-height: 1.06;
+    letter-spacing: -0.01em;
+    font-weight: 650;
+    max-width: 14ch;
+  }
+
+  .panel--blog .panel__actions {
+    margin-top: 0.08rem;
+    width: auto;
+    justify-content: flex-start;
+  }
+
+  .panel--blog .panel__primary {
+    width: fit-content;
+    padding: 0.32rem 0.6rem;
+    font-size: 0.62rem;
+    letter-spacing: 0.02em;
+    white-space: nowrap;
+  }
+
+  .panel--blog .panel__eyebrow,
+  .panel--blog .panel__title,
+  .panel--blog .panel__description {
+    text-align: left;
+  }
+
+  .panel--vibe .panel__inner {
+    gap: 0.58rem;
+    padding: 0.03rem;
+  }
+
+  .panel__title {
+    font-size: clamp(1.34rem, 6vw, 1.84rem);
+    line-height: 1;
+  }
+
+  .panel__description {
+    max-width: 100%;
+    font-size: 0.8rem;
+    line-height: 1.4;
+  }
+
+  .panel__links-label {
+    font-size: 0.66rem;
+  }
+
+  .panel__links {
+    max-height: none;
+    overflow: auto;
+    padding-right: 0.08rem;
+    gap: 0.34rem;
+  }
+
+  .panel-link__anchor {
+    padding: 0.54rem 0.58rem;
+    gap: 0.16rem;
+    border-radius: 0.6rem;
+  }
+
+  .panel-link__name {
+    font-size: 0.8rem;
+  }
+
+  .panel-link__description {
+    font-size: 0.72rem;
+    line-height: 1.36;
+  }
+
+  .panel-link__chip {
+    font-size: 0.56rem;
+    padding: 0.05rem 0.32rem;
+  }
+
+  .panel__open,
+  .mobile-back {
+    display: none;
+  }
+}
+
+@media (max-width: 640px) {
+  .split-shell {
+    --mobile-inset: 0.5rem;
+    --mobile-blog-height: clamp(7.8rem, 20svh, 9.6rem);
+    padding: var(--mobile-inset);
+  }
+
+  .panel {
+    padding: 0.58rem;
+  }
+
+  .panel--blog {
+    padding-left: 0.46rem;
+  }
+
+  .panel--vibe {
+    top: calc(var(--mobile-inset) + env(safe-area-inset-top) + var(--mobile-blog-height) + 0.3rem);
+  }
+
+  .panel--blog .panel__title {
+    font-size: clamp(0.98rem, 5vw, 1.2rem);
+    max-width: 13ch;
+  }
+
+  .panel--blog .panel__description {
+    font-size: 0.7rem;
+    line-height: 1.3;
+  }
+
+  .blog-side__menu-link {
+    font-size: 0.68rem;
+  }
+
+  .blog-side__copyright {
+    font-size: 0.58rem;
+  }
+
+  .panel--blog .panel__primary {
+    font-size: 0.58rem;
+    padding: 0.28rem 0.52rem;
+  }
+
+  .panel__title {
+    font-size: clamp(1.24rem, 7vw, 1.62rem);
+  }
+}
