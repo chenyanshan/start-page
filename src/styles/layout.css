@@ -68,6 +68,33 @@
     inset 0 1px 0 rgba(255, 255, 255, 0.16);
 }
 
+.panel__webgl-bg {
+  position: absolute;
+  inset: 0;
+  z-index: 0;
+  overflow: hidden;
+  border-radius: inherit;
+  pointer-events: none;
+  opacity: 0.48;
+  mix-blend-mode: screen;
+}
+
+.panel__webgl-bg canvas {
+  display: block;
+  width: 100%;
+  height: 100%;
+}
+
+.panel__webgl-bg::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+  background:
+    linear-gradient(168deg, rgba(10, 13, 20, 0.48), rgba(7, 9, 14, 0.72)),
+    radial-gradient(circle at 22% 18%, rgba(255, 255, 255, 0.05), transparent 38%);
+}
+
 .panel--blog::before {
   background:
     radial-gradient(
@@ -130,6 +157,7 @@
 }
 
 .panel--vibe .panel__inner {
+  z-index: 1;
   gap: 0.92rem;
 }
 
