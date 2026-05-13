@@ -60,6 +60,25 @@ interface VibePanelBackgroundController {
   destroy(): void;
 }
 
+interface DisposableResource {
+  dispose(): void;
+}
+
+interface RendererResource extends DisposableResource {
+  domElement: HTMLCanvasElement;
+  render(scene: unknown, camera: unknown): void;
+  setClearColor(color: number, alpha: number): void;
+  setPixelRatio(value: number): void;
+  setSize(width: number, height: number, updateStyle: boolean): void;
+}
+
+interface ShaderMaterialResource extends DisposableResource {
+  uniforms: {
+    u_time: { value: number };
+    u_resolution: { value: { set(width: number, height: number): void } };
+  };
+}
+
 export function attachVibePanelBackground(
   root: ParentNode
 ): VibePanelBackgroundController | undefined {
@@ -83,67 +102,100 @@ export function attachVibePanelBackground(
 function createVibePanelBackground(
   host: HTMLElement
 ): VibePanelBackgroundController {
-  const renderer = new THREE.WebGLRenderer({
-    alpha: true,
-    antialias: true,
-    powerPreference: "low-power"
-  });
-  const scene = new THREE.Scene();
-  const camera = new THREE.OrthographicCamera(-1, 1, 1, -1, 0, 1);
-  const geometry = new THREE.PlaneGeometry(2, 2);
-  const material = new THREE.ShaderMaterial({
-    transparent: true,
-    depthWrite: false,
-    depthTest: false,
-    uniforms: {
-      u_time: { value: 0 },
-      u_resolution: { value: new THREE.Vector2(1, 1) }
-    },
-    vertexShader: VERTEX_SHADER,
-    fragmentShader: FRAGMENT_SHADER
-  });
-  const mesh = new THREE.Mesh(geometry, material);
+  let renderer: RendererResource | undefined;
+  let geometry: DisposableResource | undefined;
+  let material: ShaderMaterialResource | undefined;
   let frameId: number | undefined;
+  let resizeObserver: ResizeObserver | undefined;
+  let isCleanedUp = false;
 
-  renderer.setClearColor(0x000000, 0);
-  renderer.setPixelRatio(Math.min(window.devicePixelRatio || 1, 1.5));
-  renderer.domElement.setAttribute("aria-hidden", "true");
-  host.append(renderer.domElement);
-  scene.add(mesh);
+  const cleanup = (): void => {
+    if (isCleanedUp) {
+      return;
+    }
 
-  const resize = (): void => {
-    const width = Math.max(1, Math.floor(host.clientWidth));
-    const height = Math.max(1, Math.floor(host.clientHeight));
+    isCleanedUp = true;
 
-    renderer.setSize(width, height, false);
-    material.uniforms.u_resolution.value.set(width, height);
+    if (frameId !== undefined) {
+      window.cancelAnimationFrame(frameId);
+      frameId = undefined;
+    }
+
+    resizeObserver?.disconnect();
+    resizeObserver = undefined;
+    geometry?.dispose();
+    geometry = undefined;
+    material?.dispose();
+    material = undefined;
+    renderer?.dispose();
+    renderer?.domElement.remove();
+    renderer = undefined;
   };
 
-  const render = (time: number): void => {
-    material.uniforms.u_time.value = time * 0.001;
-    renderer.render(scene, camera);
-    frameId = window.requestAnimationFrame(render);
-  };
+  try {
+    const activeRenderer: RendererResource = new THREE.WebGLRenderer({
+      alpha: true,
+      antialias: true,
+      powerPreference: "low-power"
+    });
+    renderer = activeRenderer;
+    const scene = new THREE.Scene();
+    const camera = new THREE.OrthographicCamera(-1, 1, 1, -1, 0, 1);
+    geometry = new THREE.PlaneGeometry(2, 2);
+    material = new THREE.ShaderMaterial({
+      transparent: true,
+      depthWrite: false,
+      depthTest: false,
+      uniforms: {
+        u_time: { value: 0 },
+        u_resolution: { value: new THREE.Vector2(1, 1) }
+      },
+      vertexShader: VERTEX_SHADER,
+      fragmentShader: FRAGMENT_SHADER
+    });
+    const mesh = new THREE.Mesh(geometry, material);
 
-  const resizeObserver = new ResizeObserver(resize);
+    activeRenderer.setClearColor(0x000000, 0);
+    activeRenderer.setPixelRatio(Math.min(window.devicePixelRatio || 1, 1.5));
+    activeRenderer.domElement.setAttribute("aria-hidden", "true");
+    host.append(activeRenderer.domElement);
+    scene.add(mesh);
 
-  resizeObserver.observe(host);
-  resize();
-  frameId = window.requestAnimationFrame(render);
-
-  return {
-    destroy(): void {
-      if (frameId !== undefined) {
-        window.cancelAnimationFrame(frameId);
+    const resize = (): void => {
+      if (!renderer || !material) {
+        return;
       }
 
-      resizeObserver.disconnect();
-      geometry.dispose();
-      material.dispose();
-      renderer.dispose();
-      renderer.domElement.remove();
-    }
-  };
+      const width = Math.max(1, Math.floor(host.clientWidth));
+      const height = Math.max(1, Math.floor(host.clientHeight));
+
+      renderer.setSize(width, height, false);
+      material.uniforms.u_resolution.value.set(width, height);
+    };
+
+    const render = (time: number): void => {
+      if (!renderer || !material) {
+        return;
+      }
+
+      material.uniforms.u_time.value = time * 0.001;
+      renderer.render(scene, camera);
+      frameId = window.requestAnimationFrame(render);
+    };
+
+    resizeObserver = new ResizeObserver(resize);
+
+    resizeObserver.observe(host);
+    resize();
+    frameId = window.requestAnimationFrame(render);
+
+    return {
+      destroy: cleanup
+    };
+  } catch (error) {
+    cleanup();
+    throw error;
+  }
 }
 
 function prefersReducedMotion(): boolean {
