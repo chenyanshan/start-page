@@ -1,4 +1,5 @@
 import { attachInteractions } from "./scripts/interactions";
+import { attachVibePanelBackground } from "./scripts/webgl-background";
 import { loadNavigationData } from "./scripts/load-data";
 import { renderApp } from "./scripts/render-panels";
 
@@ -18,6 +19,7 @@ export async function bootstrapApp(container: HTMLElement): Promise<void> {
     const navigationData = await loadNavigationData();
 
     container.innerHTML = renderApp(navigationData);
+    attachVibePanelBackground(container);
     attachInteractions(container);
   } catch (error) {
     const message = escapeHtml(
