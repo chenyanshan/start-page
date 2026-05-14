@@ -48,9 +48,14 @@ function renderPanel(panelKey: PanelKey, panel: PanelConfig, owner?: string): st
   const aboutAttrs = anchorAttributes(toSafeUrl(withPath(primaryUrl, "about")));
   const copyrightText = owner ? owner : "站点作者";
   const ariaControlsAttr = isBlogPanel ? "" : `aria-controls="${contentId}"`;
+  const webglBackground =
+    panelKey === "vibe"
+      ? '<div class="panel__webgl-bg" aria-hidden="true" data-webgl-background></div>'
+      : "";
 
   return `
     <article class="panel panel--${panelKey} ${panelThemeClass}" data-panel="${panelKey}">
+      ${webglBackground}
       <div class="panel__inner">
         <p class="panel__eyebrow">${escapeHtml(panel.eyebrow)}</p>
         <h1 class="panel__title">${escapeHtml(panel.title)}</h1>
