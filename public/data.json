@@ -37,6 +37,14 @@
           "tag": "工具",
           "status": "live",
           "featured": true
+        },
+        {
+          "name": "Codex Web Showcase",
+          "url": "https://codex-web-showcase.hihihiai.com/",
+          "description": "Codex Web 作品与实验展示。",
+          "tag": "展示",
+          "status": "live",
+          "featured": true
         }
       ]
     }
