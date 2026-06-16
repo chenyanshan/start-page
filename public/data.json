@@ -39,9 +39,9 @@
           "featured": true
         },
         {
-          "name": "Codex Web Showcase",
+          "name": "CodeX Web",
           "url": "https://codex-web-showcase.hihihiai.com/",
-          "description": "Codex Web 作品与实验展示。",
+          "description": "把本地 Codex 变成手机、平板、电脑都能远程使用的浏览器控制台，多用户 Agent 基座。",
           "tag": "展示",
           "status": "live",
           "featured": true
